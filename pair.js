@@ -802,7 +802,7 @@ case 'menu': {
         const BOT_NAME = '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1📍📡';
         const OWNER_NAME = '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1📍📡';
         const CHANNEL_LINK = "https://whatsapp.com/channel/0029Vb7y6JB1yT20bJxMcP45";
-        const MENU_IMG = "https://files.catbox.moe/5ncuwv.jpeg"; 
+        const MENU_IMG = "https://files.catbox.moe/fwykff.jpeg"; 
         // 👇 Video Note URL
         const VIDEO_INTRO = 'https://files.catbox.moe/rdnh0d.mp4'; 
         

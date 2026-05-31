@@ -775,7 +775,7 @@ case 'font': {
         });
 
         fancyMsg += `*┕━━━━━━━━━━━━━●►*\n\n\n`;
-        fancyMsg += `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`;
+        fancyMsg += `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐌𝙳 𝐕.2 📍📡*`;
 
         // අවසාන පණිවිඩය යැවීම
         await socket.sendMessage(sender, { text: fancyMsg }, { quoted: msg });
@@ -1237,7 +1237,7 @@ END:VCARD`
   try {
     await socket.sendMessage(sender, {react: { text: '🌪️', key: msg.key }});
     
-    const BOT_NAME = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 📍📡';
+    const BOT_NAME = '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1📡';
     const OWNER_NAME = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃';
     const CHANNEL_LINK = "channel eka dapn";
     const TIME_IMG = "https://files.catbox.moe/5ncuwv.jpeg";
@@ -1272,13 +1272,13 @@ END:VCARD`
    });
     
 const caption =  `
-*┎━『 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 𝗧𝗜𝗠𝗘  』━●►*
+*┎━『 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝗧𝗜𝗠𝗘  』━●►*
 *├►🌍 ᴜꜱᴇʀ :* \`${greetingText}\`
 *├►🗓️ ᴅᴀᴛᴇ & ᴛɪᴍᴇ :* ${getSriLankaTimestamp()}
 *├►🌡️ ʀᴀᴍ :* ${ramUsage}
 *┕━━━━━━━━━━━━━●►* 
 
-> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*		 
+> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*		 
      `.trim();
      
     const sections = [
@@ -1873,7 +1873,7 @@ const caption =  `
             const messages = {
               noCity: "❗ *Please provide a city name!* \n📋 *Usage*: .weather [city name]",
               weather: (data) => `
-*💬 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃  𝗪ᴇᴀᴛʜᴇʀ*
+*💬 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1  𝗪ᴇᴀᴛʜᴇʀ*
 
 *◈  ${data.name}, ${data.sys.country}  ◈*
 
@@ -1888,7 +1888,7 @@ const caption =  `
  𝗣ressure :* ${data.main.pressure} hPa
 
 
-> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*
+> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*
 `,
               cityNotFound: "🚫 *City not found!* \n🔍 Please check the spelling and try again.",
               error: "⚠️ *An error occurred!* \n🔄 Please try again later."
@@ -2400,7 +2400,7 @@ END:VCARD`
             // Get bot name dynamically
             const sanitized = (number || '').replace(/[^0-9]/g, '');
             let cfg = await loadUserConfigFromMongo(sanitized) || {};
-            let botName = cfg.botName || '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 📍📡';
+            let botName = cfg.botName || '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1.0.0𝙑 📍📡';
 
             // Create caption
             const caption = `*${botName} 𝗧ɪᴋᴛᴏᴋ 𝗗ᴏᴡɴʟᴏᴀᴅᴇʀ*\n\n` +
@@ -2413,7 +2413,7 @@ END:VCARD`
               `*╠⦁ 📥 𝗗ᴏᴡɴʟᴏᴀᴅᴇ:* ${videoData.download_count || 0}\n` +
               `*╚═══════════◆◉◉➤*\n\n` +
               
-              `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`;
+              `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐕.2 📍📡*`;
 
             // Send the video
             await socket.sendMessage(sender, {
@@ -2438,7 +2438,7 @@ END:VCARD`
               if (altData.data && altData.data.play) {
                 const sanitized = (number || '').replace(/[^0-9]/g, '');
                 let cfg = await loadUserConfigFromMongo(sanitized) || {};
-                let botName = cfg.botName || '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 📍📡';
+                let botName = cfg.botName || '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 2.0.0𝙑 📍📡';
 
                 const caption = `*${botName} 𝗧ɪᴋᴛᴛᴏᴋ 𝗗ᴏᴡɴʟᴏᴀᴅᴇʀ*\n\nTitle: ${altData.data.title || 'No Title'}\nAuthor: ${altData.data.author.nickname || 'Unknown'}`;
 
@@ -2784,7 +2784,7 @@ END:VCARD`
 
     const sanitized = (number || '').replace(/[^0-9]/g, '');
     const cfg = await loadUserConfigFromMongo(sanitized) || {};
-    const botName = cfg.botName || '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 📍📡'; // Default fancy name
+    const botName = cfg.botName || '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕12.0.0𝙑 📍📡'; // Default fancy name
     const logo = cfg.logo || config.RCD_IMAGE_PATH;
 
     // 2. Calculate Uptime
@@ -2881,10 +2881,10 @@ END:VCARD` } }
     const settingOptions = {
       name: 'single_select',
       paramsJson: JSON.stringify({
-        title: `𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 𝐒𝐄𝐓𝐓𝐈𝐍𝐆 𝐍𝐄𝐖 💜`,
+        title: `𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕12.0.0𝙑 𝐒𝐄𝐓𝐓𝐈𝐍𝐆 𝐍𝐄𝐖 💜`,
         sections: [
           {
-            title: '📍 𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ᴘᴇʀꜱᴏɴᴀʟɪᴢᴀᴛɪᴏɴ',
+            title: '📍 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴠ.2.0.0 ᴘᴇʀꜱᴏɴᴀʟɪᴢᴀᴛɪᴏɴ',
             highlight_label: 'New',
             rows: [
               { 
@@ -2896,7 +2896,7 @@ END:VCARD` } }
           },
           
           {
-            title: '📍 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 ᴛʏᴘᴇ ᴏꜰ ᴡᴏʀᴋ',
+            title: '📍 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕10.0𝙑 ᴛʏᴘᴇ ᴏꜰ ᴡᴏʀᴋ',
             rows: [
               { title: '📍 ➤ 𝐏𝐮𝐛𝐥𝐢𝐜 𝐌𝐨𝐝𝐞', description: 'Bot works for everyone', id: `${config.PREFIX}wtype public` },
               { title: '📍 ➤ 𝐏𝐫𝐢𝐯𝐚𝐭𝐞 𝐌𝐨𝐝𝐞', description: 'Bot works only for you', id: `${config.PREFIX}wtype private` },
@@ -2917,7 +2917,7 @@ END:VCARD` } }
             ],
           },
           {
-            title: '📍 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑  ᴀᴜᴛᴏᴍᴀᴛɪᴏɴ & ᴛᴏᴏʟꜱ',
+            title: '📍 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 2.0.0𝙑  ᴀᴜᴛᴏᴍᴀᴛɪᴏɴ & ᴛᴏᴏʟꜱ',
             rows: [
               { title: '📍 ➤ 𝐀𝐮𝐭𝐨 𝐒𝐞𝐞𝐧 𝐒𝐭𝐚𝐭𝐮𝐬 ▸ 𝐎𝐍', description: 'View statuses automatically', id: `${config.PREFIX}rstatus on` },
               { title: '📍 ➤ 𝐀𝐮𝐭𝐨 𝐒𝐞𝐞𝐧 𝐒𝐭𝐚𝐭𝐮𝐬 ▸ 𝐎𝐅𝐅', description: 'Do not view statuses', id: `${config.PREFIX}rstatus off` },
@@ -2928,7 +2928,7 @@ END:VCARD` } }
             ],
           },
           {
-            title: '📍 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑  ᴍᴇꜱꜱᴀɢᴇ ʜᴀɴᴅʟɪɴɢ',
+            title: '📍 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕12.0.0𝙑  ᴍᴇꜱꜱᴀɢᴇ ʜᴀɴᴅʟɪɴɢ',
             rows: [
               { title: '📍 𝐑𝐞𝐚𝐝 𝐀𝐥𝐥 : 𝐎𝐍', description: 'Blue tick everything', id: `${config.PREFIX}mread all` },
               { title: '📍 𝐑𝐞𝐚𝐝 𝐂𝐦𝐝𝐬 : 𝐎𝐍', description: 'Blue tick commands only', id: `${config.PREFIX}mread cmd` },
@@ -3010,7 +3010,7 @@ case 'freebot': {
 
     if (!number) {
         return await socket.sendMessage(sender, {
-            text: '*📃 Usage:* .freebot +9476XXX'
+            text: '*📃 Usage:* .pair  +9476XXX'
         }, { quoted: msg });
     }
 
@@ -3206,7 +3206,7 @@ case 'freebot': {
     await socket.sendMessage(sender, {
       image: imagePayload,
       caption: text,
-      footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`,
+      footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*`,
       buttons: buttons,
       headerType: 4
     }, { quoted: msg });
@@ -3235,7 +3235,7 @@ case 'freebot': {
 
             const os = require('os');
             const text = `
-*┎━━『 📁 *𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 𝐒𝚈𝚂𝚃𝙴𝙼 𝐈𝙽𝙵𝙾* 』━●►*
+*┎━━『 📁 *𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐒𝚈𝚂𝚃𝙴𝙼 𝐈𝙽𝙵𝙾* 』━●►*
 *├► 🧸 oꜱ:* ${os.type()} ${os.release()}
 *├► 📡 pʟᴀᴛꜰᴏʀᴍ :* ${os.platform()}
 *├► 🧠 cᴘᴜ ᴄᴏʀᴇꜱ:* ${os.cpus().length}
@@ -3314,7 +3314,7 @@ case 'freebot': {
 ┃🔗 *𝗨ʀʟ:* https://youtu.be/${extractYouTubeId(youtubeUrl) || 'N/A'}
 ┗━━━━━━━━━━━◆◉◉➤
 
-> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`;
+> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐕.2 📍📡*`;
 
             // Create buttons for format selection
             const buttons = [
@@ -3648,7 +3648,7 @@ case 'news': {
             const text = `
 *𝗛ɪ 👋 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝗠ɪɴɪ 𝗕ᴏᴛ 𝗨ꜱᴇʀ*
 
-*┎━━『 📰 *𝐄𝚁𝙰𝙽𝙽𝙳𝙰-𝐌𝙳 𝐍𝙴𝚆𝚂* 』━●►
+*┎━━『 📰 *𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐍𝙴𝚆𝚂* 』━●►
 *├► 🗯️ ɢʀᴇᴇᴛɪɴɢ :* ${greeting}
 *├► 𝙼𝚈 𝙳𝙴𝙰𝚁 𝚄𝚂𝙴𝚁 𝚃𝙷𝙸𝚂 𝙸𝚂* 
 *├► 𝙴𝚁𝙰𝙽𝙽𝙳𝙰-𝙼𝙳 𝙽𝙴𝚆𝚂 𝚄𝙿𝙳𝙰𝚃𝙴𝚂*
@@ -3659,7 +3659,7 @@ case 'news': {
               {
                 buttonId: 'action',
                 buttonText: {
-                  displayText: '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 𝐍𝙴𝚆𝚂 📰'
+                  displayText: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 2.0.0𝙑 𝐍𝙴𝚆𝚂 📰'
                 },
                 type: 4,
                 nativeFlowInfo: {
@@ -3673,55 +3673,55 @@ case 'news': {
                         rows: [
                           {
                             title: 'ᴀᴅᴀɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ᴀᴅᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1_ᴍᴅ ᴀᴅᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}ada`,
                           },
                           {
                             title: 'ʜɪʀᴜ ɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ʜɪʀᴜ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ʜɪʀᴜ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}hiru`,
                           },
                           {
                             title: 'ꜱɪʀᴀꜱᴀ ɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ꜱɪʀᴀꜱᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ꜱɪʀᴀꜱᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}sirasa`,
                           },
                           {
                             title: 'ɪᴛɴ ɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ɪᴛɴ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ɪᴛɴ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}itn`,
                           },
                           // පස්සෙ කෑල්ල මෙතනට
                           {
                             title: 'ʟɴᴡ ɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ʟɴᴡ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1ᴅ ʟɴᴡ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}lnw`,
                           },
                           {
                             title: 'ʙʙᴄ ɴᴇᴡꜱ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ʙʙᴄ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ʙʙᴄ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}bbc`,
                           },
                           // මෙතනට ටයිපින්
                           {
                             title: 'ᴅᴀꜱᴀᴛʜᴀ ʟᴀɴᴋᴀ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ᴅᴀꜱᴀᴛʜᴀ ɴᴡᴇꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1ᴅᴀꜱᴀᴛʜᴀ ɴᴡᴇꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}dasathalanka`,
                           },
                           {
                             title: 'ꜱɪʏᴀᴛᴀ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ꜱɪʏᴀᴛʜᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ꜱɪʏᴀᴛʜᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}siyatha`,
                           },
                           // රෙකෝඩින් එක මෙතනට
                           {
                             title: 'ʟᴀɴᴋᴀᴅᴇᴇᴘᴀ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ʟᴀɴᴋᴀᴅᴇᴇᴘᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ʟᴀɴᴋᴀᴅᴇᴇᴘᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}lankadeepa`,
                           },
                           {
                             title: 'ɢᴀɢᴀɴᴀ 📰',
-                            description: 'ᴇʀᴀɴɴᴅᴀ_ᴍᴅ ɢᴀɢᴀɴᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
+                            description: '𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ɢᴀɢᴀɴᴀ ɴᴇᴡꜱ ᴜᴘᴅᴀᴛᴇ 📍',
                             id: `${config.PREFIX}gagana`,
                           },
                           // මෙතනට තව මොකක් හරි
@@ -3739,7 +3739,7 @@ case 'news': {
             await socket.sendMessage(sender, {
               image: imagePayload,
               caption: text,
-              footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`,
+              footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐕.2 📍📡*`,
               buttons,
               headerType: 4
             }, { quoted: metaQuote });
@@ -4211,8 +4211,8 @@ case 'dp': {
 ┕━━━━━━━━━━●►
 
 
-   *අඩන්න එපා හලිද profile එක විතරයිනේ ගත්තේ මන් අල ගේනත් දෙන්නම්කො සුදු හලිද 🥺💗𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1=.owner0705851067*
-`;
+   *අඩන්න එපා හලිද profile එක විතරයිනේ ගත්තේ මන් අල ගේනත් දෙන්නම්කො සුදු හලිද 🥺💗 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 = owner Eranda 🤌🧚0705851067*
+`;  
 
         // --- META BROADCAST QUOTE (Style) ---
         const metaQuote = {

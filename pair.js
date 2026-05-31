@@ -1241,7 +1241,7 @@ END:VCARD`
     const OWNER_NAME = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃';
     const CHANNEL_LINK = "channel eka dapn";
     const TIME_IMG = "https://files.catbox.moe/5ncuwv.jpeg";
-    const VIDEO_NOTE = "video  note eka dapn";
+    const VIDEO_NOTE = "https://files.catbox.moe/ea57z8.mp4";
     
     
     const slTme = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Colombo"}));
@@ -1250,11 +1250,11 @@ END:VCARD`
     const dateStr = slTme.toLocaleDateString("en-US", {year: "numeric", month: "short", day: "2-digit"});
     
     let greetingText = "";
-    if (hour < 5) greetingText = "🌌 සුභ අලුයම";
-    else if (hour < 12) greetingText = "🌅 සුභ උදෑසනක්";
-    else if (hour < 18) greetingText = "🌞 සුභ දහවල්";
-    else if (hour < 22) greetingText = "🌙 සුභ සන්ධ්‍යාවක්";
-    else greetingText = "🦉 සුභ රාත්‍රියක්";
+    if (hour < 5) greetingText = "🌌 සුභ අලුයම"💛;
+    else if (hour < 12) greetingText = "🌅 සුභ උදෑසනක්"🫀;
+    else if (hour < 18) greetingText = "🌞 සුභ දහවල්"🫀;
+    else if (hour < 22) greetingText = "🌙 සුභ සන්ධ්‍යාවක්"🫀;
+    else greetingText = "🦉 සුභ රාත්‍රියක්"🫀;
    
    
     const ramUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
@@ -3175,7 +3175,7 @@ case 'freebot': {
       : 'Slow ❤️';
 
     const text = `
-┍『 ✨ *𝐄𝚁𝙰𝙽𝙼𝙳𝙰-𝐒𝙿𝙴𝙴𝙳* 』━●►
+┍『 ✨ *𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐒𝙿𝙴𝙴𝙳* 』━●►
 ├► 👤 *USER* : ${userTag}
 ├► 🌏 *GREETING* : ${greeting}
 ├► ⏰ *TIME* : ${formattedTime}
@@ -3248,7 +3248,7 @@ case 'freebot': {
             await socket.sendMessage(sender, {
               image: imagePayload,
               caption: text,
-              footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*`,
+              footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐌𝙳 𝐕.2 📍📡*`,
               buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝗠ᴇɴᴜ" }, type: 1 }],
               headerType: 4
             }, { quoted: metaQuote });
@@ -3575,7 +3575,7 @@ case 'freebot': {
         }
 
 
-        // 𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰 𝗡ᴇᴡꜱ 𝗖ᴀꜱᴇ
+        // 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕14.0.0𝗩 🥷🇱🇰 𝗡ᴇᴡꜱ 𝗖ᴀꜱᴇ
 
 case 'news': {
           try {
@@ -4101,7 +4101,7 @@ END:VCARD` }
           break;
         }
 
-        // 𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰 𝗜ᴍᴀɢᴇ 𝗖ᴀꜱᴇ
+        // 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 4.0.0𝗩 🥷🇱🇰 𝗜ᴍᴀɢᴇ 𝗖ᴀꜱᴇ
 
         case 'img': {
           const q = body.replace(/^[.\/!]img\s*/i, '').trim();
@@ -4212,7 +4212,7 @@ case 'dp': {
 
 
    *අඩන්න එපා හලිද profile එක විතරයිනේ ගත්තේ මන් අල ගේනත් දෙන්නම්කො සුදු හලිද 🥺💗 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 = owner Eranda 🤌🧚0705851067*
-`;  
+`;  const VIDEO_INTRO = 'https://files.catbox.moe/ea57z8.mp4'; 
 
         // --- META BROADCAST QUOTE (Style) ---
         const metaQuote = {
@@ -4220,7 +4220,7 @@ case 'dp': {
                 remoteJid: "status@broadcast", 
                 participant: "0@s.whatsapp.net", 
                 fromMe: false, 
-                id: "𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑 📍📡" 
+                id: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕12.0.0𝙑 📍📡" 
             },
             message: { 
                 contactMessage: { 
@@ -4282,6 +4282,7 @@ case 'erannda': {
             const ownerName = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃📍📡';
             const organization = '*𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 𝙾𝚆𝙽𝙴𝚁 𝙱𝚈 𝐀ʏᴇꜱʜ 𝐓ʜᴇᴍɪʏᴀ 𝙱𝙾𝚃 𝙳𝙴𝚅𝙰𝙻𝙾𝙿𝙰𝚁';
             const logoUrl = 'https://files.catbox.moe/fwykff.jpeg';
+            const VIDEO_INTRO = 'https://files.catbox.moe/ea57z8.mp4'; 
 
             const vcard = 'BEGIN:VCARD\n' +
                           'VERSION:3.0\n' +

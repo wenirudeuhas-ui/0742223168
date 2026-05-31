@@ -2906,7 +2906,7 @@ END:VCARD` } }
           },
           
           {
-            title: '📍 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃 2.0.0𝙑  ɢʜᴏꜱᴛ & ᴘʀɪᴠᴀᴄʏ',
+            title: '🫀🐇𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1  ɢʜᴏꜱᴛ & ᴘʀɪᴠᴀᴄʏ',
             rows: [
               { title: '📍 ➤ 𝐀𝐥𝐰𝐚𝐲𝐬 𝐎𝐧𝐥𝐢𝐧𝐞 ▸ 𝐎𝐍', description: 'Show online badge', id: `${config.PREFIX}botpresence online` },
               { title: '📍 ➤ 𝐀𝐥𝐰𝐚𝐲𝐬 𝐎𝐧𝐥𝐢𝐧𝐞 ▸ 𝐎𝐅𝐅', description: 'Hide online badge', id: `${prefix}botpresence offline` },
@@ -3646,7 +3646,7 @@ case 'news': {
 
 
             const text = `
-*𝗛ɪ 👋 𝐄𝚁𝙰𝙽𝙽𝙳𝙰-𝐌𝙳 𝗠ɪɴɪ 𝗕ᴏᴛ 𝗨ꜱᴇʀ*
+*𝗛ɪ 👋 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝗠ɪɴɪ 𝗕ᴏᴛ 𝗨ꜱᴇʀ*
 
 *┎━━『 📰 *𝐄𝚁𝙰𝙽𝙽𝙳𝙰-𝐌𝙳 𝐍𝙴𝚆𝚂* 』━●►
 *├► 🗯️ ɢʀᴇᴇᴛɪɴɢ :* ${greeting}
@@ -4278,10 +4278,10 @@ _${e.message}_`
         // 𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰𝗢ᴡɴᴇʀ 𝗖ᴀꜱᴇ
 case 'owner':
 case 'erannda': {
-            const ownerNumber = '+94705861067';
+            const ownerNumber = '+94705851067';
             const ownerName = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃📍📡';
             const organization = '*𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 𝙾𝚆𝙽𝙴𝚁 𝙱𝚈 𝐀ʏᴇꜱʜ 𝐓ʜᴇᴍɪʏᴀ 𝙱𝙾𝚃 𝙳𝙴𝚅𝙰𝙻𝙾𝙿𝙰𝚁';
-            const logoUrl = 'https://files.catbox.moe/z99gzh.mp4';
+            const logoUrl = 'https://files.catbox.moe/fwykff.jpeg';
 
             const vcard = 'BEGIN:VCARD\n' +
                           'VERSION:3.0\n' +

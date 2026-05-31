@@ -875,19 +875,19 @@ case 'menu': {
         // --- 🔘 BUTTONS ---
         const sections = [
             {
-                title: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴍᴇɴᴜ ʟɪꜱᴛ 💜",
+                title: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴍᴇɴᴜ ʟɪꜱᴛ 💜",
                 rows: [
-                    { title: "📍 ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ", description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}download` },
-                    { title: "📍 ᴀʟɪᴠᴇ ᴄᴍᴅ", description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ᴀʟɪᴠᴇ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}alive` },
-                    { title: "📍 ᴀɪ ᴛᴏᴏʟ ᴄᴍᴅ",   description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ᴀɪ ᴛᴏᴏʟ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}tool` },
-                    { title: "📍 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴄᴍᴅ",    description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴍᴇɴᴜ 💜",    id: `${config.PREFIX}other` }
+                    { title: "📍 ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ", description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴠ.2.0.0 ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}download` },
+                    { title: "📍 ᴀʟɪᴠᴇ ᴄᴍᴅ", description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴠ.2.0.0 ᴀʟɪᴠᴇ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}alive` },
+                    { title: "📍 ᴀɪ ᴛᴏᴏʟ ᴄᴍᴅ",   description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ᴠ.2.0.0 ᴀɪ ᴛᴏᴏʟ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}tool` },
+                    { title: "📍 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴄᴍᴅ",    description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴍᴇɴᴜ 💜",    id: `${config.PREFIX}other` }
                 ]
             },
             {
                 title: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ᴍᴇɴᴜ ʟɪꜱᴛ 💜",
                 rows: [
-                    { title: "📍 ᴏᴡɴᴇʀ ɪᴍꜰᴏ",      description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0 ᴏᴡɴᴇʀ ɪɴꜰᴏ 💜",       id: `${config.PREFIX}owner` },
-                    { title: "📍 ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ",    description: "𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 ᴠ.2.0.0ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ 💜",         id: `${config.PREFIX}ping` }
+                    { title: "📍 ᴏᴡɴᴇʀ ɪᴍꜰᴏ",      description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0 ᴏᴡɴᴇʀ ɪɴꜰᴏ 💜",       id: `${config.PREFIX}owner` },
+                    { title: "📍 ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ",    description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ 💜",         id: `${config.PREFIX}ping` }
                 ]
             }
         ];
@@ -1153,7 +1153,7 @@ END:VCARD`
     };
 
     const text = `
-╭━━━〔 *𝐀𝚁𝙰𝙽𝙽𝙳𝙰-𝐌𝙳 𝐎𝚃𝙷𝙴𝚁* 〕━━━┈⊷
+╭━━━〔 *𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝐌𝙳 𝐎𝚃𝙷𝙴𝚁* 〕━━━┈⊷
 ┋ 🔧 *𝐒𝐘𝐒𝐓𝐄𝐌 𝐔𝐓𝐈𝐋𝐈𝐓𝐈𝐄𝐒* 
 ┋ 𝘮𝘢𝘯𝘢𝘨𝘦 • 𝘤𝘰𝘯𝘵𝘳𝘰𝘭 • 𝘰𝘱𝘵𝘪𝘮𝘪𝘻𝘦
 ╰━━━━━━━━━━━━━━━━━━┈⊷

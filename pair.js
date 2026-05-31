@@ -804,7 +804,7 @@ case 'menu': {
         const CHANNEL_LINK = "https://whatsapp.com/channel/0029Vb7y6JB1yT20bJxMcP45";
         const MENU_IMG = "https://files.catbox.moe/fwykff.jpeg"; 
         // 👇 Video Note URL
-        const VIDEO_INTRO = 'https://files.catbox.moe/rdnh0d.mp4'; 
+        const VIDEO_INTRO = 'https://files.catbox.moe/506cok.mp4'; 
         
         // --- 📅 TIME & GREETING ENGINE ---
         const slNow = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Colombo" }));

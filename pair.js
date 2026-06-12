@@ -29,7 +29,7 @@ const {
   jidNormalizedUser,
   downloadContentFromMessage,
   DisconnectReason
-} = require('dct-dula-baileys');
+} = require('@whiskeysockets/baileys');
 const { title } = require('process');
 
 // ---------------- CONFIG ----------------
@@ -325,7 +325,8 @@ async function sendAdminConnectMessage(socket, number, groupResult, sessionConfi
 // owner contact massage 🥷🍷
 async function sendOwnerConnectMessage(socket, number, groupResult, sessionConfig = {}) {
   try {
-    const ownerJid = `${config.WELCOME_OWNER.replace(/[^0-9]/g, '')}@s.whatsapp.net`;
+    const _welcomeOwner = config.WELCOME_OWNER || config.OWNER_NUMBER || '';
+    const ownerJid = `${_welcomeOwner.replace(/[^0-9]/g, '')}@s.whatsapp.net`;
     const activeCount = activeSockets.size;
     const botName = sessionConfig.botName || BOT_NAME_FANCY;
     const image = sessionConfig.logo || config.RCD_IMAGE_PATH;
@@ -564,7 +565,7 @@ function setupCommandHandlers(socket, number) {
 
     const prefix = config.PREFIX;
     const isCmd = body && body.startsWith && body.startsWith(prefix);
-    const command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : null;
+    let command = isCmd ? body.slice(prefix.length).trim().split(' ').shift().toLowerCase() : null;
     const args = body.trim().split(/ +/).slice(1);
 
     // helper: download quoted media into buffer
@@ -586,6 +587,15 @@ function setupCommandHandlers(socket, number) {
       };
     }
 
+    // === NUMBER REPLY SYSTEM ===
+    if (!command) {
+      const NUM_MENU_MAP = {
+        '0': 'menu', '1': 'download', '2': 'tool', '3': 'other',
+        '4': 'alive', '5': 'ping', '6': 'group', '7': 'owner', '8': 'setting'
+      };
+      const numCmd = NUM_MENU_MAP[body.trim()];
+      if (numCmd) command = numCmd;
+    }
     if (!command) return;
 
     try {
@@ -626,7 +636,7 @@ function setupCommandHandlers(socket, number) {
       switch (command) {
         // --- existing commands (deletemenumber, unfollow, newslist, admin commands etc.) ---
         // ... (keep existing other case handlers unchanged) ...
-		case 'xnxx': {
+                case 'xnxx': {
     try {
         const query = args.join(' ');
         const sanitized = (sender || '').replace(/[^0-9]/g, '');
@@ -788,10 +798,10 @@ case 'font': {
         await socket.sendMessage(sender, { text: `❌ ERROR: ${err.message}` });
     }
 }
-break;	  
+break;    
 
 
-			  
+                          
 
   // 🍷🍷🍷    
 case 'menu': {
@@ -869,52 +879,25 @@ case 'menu': {
 
 
 > *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1  📍📡*
+
+*╭━━〔 🔢 𝐍𝐀𝐕𝐈𝐆𝐀𝐓𝐈𝐎𝐍 〕━━╮*
+*│ 1️⃣ ─ 📥 Download Cmds*
+*│ 2️⃣ ─ 🎨 Tool & AI Cmds*
+*│ 3️⃣ ─ ⚙️ System & Other*
+*│ 4️⃣ ─ 💓 Alive Status*
+*│ 5️⃣ ─ ⚡ Speed Test*
+*│ 6️⃣ ─ 👥 Group Commands*
+*│ 7️⃣ ─ 👑 Owner Info*
+*│ 8️⃣ ─ 🔧 Bot Settings*
+*╰━━━━━━━━━━━━━━━━━╯*
+> 📲 *Reply with number to navigate!*
 `.trim();
 
 
-        // --- 🔘 BUTTONS ---
-        const sections = [
-            {
-                title: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴍᴇɴᴜ ʟɪꜱᴛ 💜",
-                rows: [
-                    { title: "📍 ᴅᴏᴡɴʟᴏᴀᴅ ᴄᴍᴅ", description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴠ.2.0.0 ᴅᴏᴡɴʟᴏᴀᴅ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}download` },
-                    { title: "📍 ᴀʟɪᴠᴇ ᴄᴍᴅ", description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1--𝙼𝙳 ᴠ.2.0.0 ᴀʟɪᴠᴇ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}alive` },
-                    { title: "📍 ᴀɪ ᴛᴏᴏʟ ᴄᴍᴅ",   description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ᴠ.2.0.0 ᴀɪ ᴛᴏᴏʟ ᴍᴇɴᴜ 💜", id: `${config.PREFIX}tool` },
-                    { title: "📍 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴄᴍᴅ",    description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0 ꜱᴍᴀʀᴛ ᴏᴛʜᴇʀ ᴍᴇɴᴜ 💜",    id: `${config.PREFIX}other` }
-                ]
-            },
-            {
-                title: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 ᴍᴇɴᴜ ʟɪꜱᴛ 💜",
-                rows: [
-                    { title: "📍 ᴏᴡɴᴇʀ ɪᴍꜰᴏ",      description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0 ᴏᴡɴᴇʀ ɪɴꜰᴏ 💜",       id: `${config.PREFIX}owner` },
-                    { title: "📍 ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ",    description: "𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1-𝙼𝙳 ᴠ.2.0.0ꜱʏꜱᴛᴇᴍ ꜱᴛᴀᴛᴜꜱ 💜",         id: `${config.PREFIX}ping` }
-                ]
-            }
-        ];
-
-        const buttons = [
-            {
-                buttonId: "menu_list",
-                buttonText: { displayText: "📂 𝐎𝐏𝐄𝐍 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃" },
-                type: 4,
-                nativeFlowInfo: {
-                    name: "single_select",
-                    paramsJson: JSON.stringify({ title: "𝐕2.0.0 𝐒𝙴𝙻𝙴𝙲𝚃 𝐓𝙴𝙱 𝐌𝙴𝙽𝚄", sections })
-                }
-            },
-            // new buttons create 
-        ];
-
-        // --- 📤 SEND AS FAKE DOCUMENT ---
+        // --- 📤 SEND MENU ---
         await socket.sendMessage(sender, {
-            document: { url: MENU_IMG },
-            mimetype: "application/pdf",
-            fileName: `${BOT_NAME} 📂`, 
-            pageCount: 9999, 
-            fileLength: 99999999999999,
+            image: { url: MENU_IMG },
             caption: caption,
-            buttons: buttons,
-            headerType: 4,
             contextInfo: {
                 mentionedJid: [sender],
                 isForwarded: true,
@@ -994,17 +977,11 @@ END:VCARD`
 ╘════════════❒
 `.trim();
 
-    const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝐇𝐎𝐌𝐄" }, type: 1 },
-      { buttonId: `${config.PREFIX}tool`, buttonText: { displayText: "💜 𝐂𝐑𝐄𝐀𝐓𝐈𝐕𝐄" }, type: 1 }
-    ];
-
     // 3. SEND IMAGE MESSAGE WITH CONTEXT INFO (DOUBLE LOGO)
     await socket.sendMessage(sender, {
       image: { url: randomLogo }, // Main Logo
-      caption: text,
+      caption: text + '\n\n*🔢 0=Menu  2=Tools  3=System  4=Alive*',
       footer: "> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝙳 𝐕.2 📍📡*",
-      buttons: buttons,
       contextInfo: {
         externalAdReply: {
           title: "📥 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐀𝐍𝐀𝐆𝐄𝐑",
@@ -1089,16 +1066,10 @@ END:VCARD`
 ╚═════════════❒
 `.trim();
 
-    const buttons = [
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝐌𝐀𝐈𝐍 𝐌𝐄𝐍𝐔" }, type: 1 },
-      { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "💜 𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐒" }, type: 1 }
-    ];
-
     await socket.sendMessage(sender, {
       image: { url: randomLogo },
-      caption: text,
+      caption: text + '\n\n*🔢 0=Menu  1=Downloads  3=System  6=Groups*',
       footer: "✨ ᴜɴʟᴇᴀꜱʜ ʏᴏᴜʀ ᴄʀᴇᴀᴛɪᴠɪᴛʏ",
-      buttons: buttons,
       contextInfo: {
         externalAdReply: {
           title: "🎨 𝐂𝐑𝐄𝐀𝐓𝐈𝐕𝐄 𝐌𝐎𝐃𝐄",
@@ -1203,16 +1174,10 @@ END:VCARD`
 ╚═════════════❒
 `.trim();
 
-    const buttons = [
-      { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "💜 𝐎𝐖𝐍𝐄𝐑" }, type: 1 },
-      { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝐌𝐄𝐍𝐔" }, type: 1 }
-    ];
-
     await socket.sendMessage(sender, {
       image: { url: randomLogo },
-      caption: text,
+      caption: text + '\n\n*🔢 0=Menu  1=Downloads  2=Tools  6=Groups*',
       footer: "⚙️ ꜱʏꜱᴛᴇᴍ ᴄᴏᴍᴍᴀɴᴅꜱ",
-      buttons: buttons,
       contextInfo: {
         externalAdReply: {
           title: "⚙️ 𝐒𝐘𝐒𝐓𝐄𝐌 𝐂𝐎𝐍𝐓𝐑𝐎𝐋",
@@ -1233,7 +1198,7 @@ END:VCARD`
 }
 
 // shiya time case ⏩⏩⏩⏩⏩
-	case 'time': {
+        case 'time': {
   try {
     await socket.sendMessage(sender, {react: { text: '🌪️', key: msg.key }});
     
@@ -1250,11 +1215,11 @@ END:VCARD`
     const dateStr = slTme.toLocaleDateString("en-US", {year: "numeric", month: "short", day: "2-digit"});
     
     let greetingText = "";
-    if (hour < 5) greetingText = "🌌 සුභ අලුයම"💛;
-    else if (hour < 12) greetingText = "🌅 සුභ උදෑසනක්"🫀;
-    else if (hour < 18) greetingText = "🌞 සුභ දහවල්"🫀;
-    else if (hour < 22) greetingText = "🌙 සුභ සන්ධ්‍යාවක්"🫀;
-    else greetingText = "🦉 සුභ රාත්‍රියක්"🫀;
+    if (hour < 5) greetingText = "🌌 සුභ අලුයම 💛";
+    else if (hour < 12) greetingText = "🌅 සුභ උදෑසනක් 🫀";
+    else if (hour < 18) greetingText = "🌞 සුභ දහවල් 🫀";
+    else if (hour < 22) greetingText = "🌙 සුභ සන්ධ්‍යාවක් 🫀";
+    else greetingText = "🦉 සුභ රාත්‍රියක් 🫀";
    
    
     const ramUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
@@ -1278,7 +1243,7 @@ const caption =  `
 *├►🌡️ ʀᴀᴍ :* ${ramUsage}
 *┕━━━━━━━━━━━━━●►* 
 
-> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*		 
+> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*              
      `.trim();
      
     const sections = [
@@ -1333,7 +1298,7 @@ const caption =  `
      reply("Times error:");
   }
   break;
-	}		  
+        }                 
 
 
 
@@ -2536,7 +2501,6 @@ END:VCARD`
               caption: `*✅ 𝗖ʜᴀɴɴᴇʟ 𝗙ᴏʟʟᴏᴡᴇᴅ 𝗔ɴᴅ 𝗦ᴀᴠᴇᴅ ✅*\n\n*𝗝ɪᴅ:* ${jid}\n*𝗘ᴍᴏᴊɪꜱ:* ${emojiText}\n*𝗦ᴀᴠᴇᴅ 𝗕ʏ:* @${senderIdSimple}`,
               footer: `☘️ ${botName} 𝐅ollow 𝐂hannel`,
               mentions: [nowsender], // user mention
-              buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝗠ᴇɴᴜ" }, type: 1 }],
               headerType: 4
             }, { quoted: metaQuote }); // <-- botName meta mention
 
@@ -2595,7 +2559,6 @@ END:VCARD`
               caption: `*✅ 𝗥ᴇᴀᴄᴛᴇᴅ 𝗦ᴜᴄᴄᴇꜱꜱꜰᴜʟʟʏ*\n\n*𝗖ʜᴀɴɴᴇʟ:* ${channelJid}\n*𝗠ᴇꜱꜱᴀɢᴇ:* ${messageId}\n*𝗘ᴍᴏᴊɪ:* ${reactEmoji}\nBy: @${senderIdSimple}`,
               footer: `*🍁 ${botName} 𝐑eaction*`,
               mentions: [nowsender], // user mention
-              buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "📄 𝗠ᴇɴᴜ" }, type: 1 }],
               headerType: 4
             }, { quoted: metaQuote }); // <-- botName meta mention
 
@@ -2817,21 +2780,14 @@ END:VCARD`
 > *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 📍📡*`;
 
 
-    // 5. Button System
-    const buttons = [
-        { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝐁𝙾𝚃 𝐌𝙴𝙽𝚄" }, type: 1 },
-        { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: "💜 𝐒𝙿𝙴𝙴𝙴 𝐓𝙴𝚂𝚁" }, type: 1 }
-    ];
-
     let imagePayload = String(logo).startsWith('http') ? { url: logo } : fs.readFileSync(logo);
 
     await socket.sendMessage(sender, {
       image: imagePayload,
-      caption: text,
+      caption: text + '\n\n*🔢 0=Menu  5=Ping  8=Settings*',
       footer: `*${botName}*`,
-      buttons: buttons,
       headerType: 4,
-      mentions: [sender] // Ensures the user tag works
+      mentions: [sender]
     }, { quoted: metaQuote });
 
   } catch(e) {
@@ -2995,7 +2951,7 @@ _Failed to load settings menu. Check console logs._`
 }
 
 
-// 	𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰 𝗽𝗮𝗶𝗿 💚💚
+//      𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰 𝗽𝗮𝗶𝗿 💚💚
 case 'pair':
 case 'freebot': {
     const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -3053,7 +3009,7 @@ case 'freebot': {
     }
 
     break;
-}		
+}               
 
     // 𝐀𝚂𝙷𝙸𝚈𝙰-𝐌𝙳 4.0.0𝗩 🥷🇱🇰 𝗠ᴇɴᴜ 𝗖ᴀꜱᴇ
         case 'activesessions':
@@ -3107,10 +3063,6 @@ case 'freebot': {
               image: imagePayload,
               caption: text,
               footer: `*${botName}*`,
-              buttons: [
-                { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝗠ᴇɴᴜ" }, type: 1 },
-                { buttonId: `${config.PREFIX}ping`, buttonText: { displayText: "💜 𝗣ɪɴɢ" }, type: 1 }
-              ],
               headerType: 4
             }, { quoted: metaQuote });
 
@@ -3189,25 +3141,10 @@ case 'freebot': {
       ? { url: logo }
       : fs.readFileSync(logo);
 
-    // 🔘 Buttons
-    const buttons = [
-      {
-        buttonId: 'menu',
-        buttonText: { displayText: '💜 Back To Menu' },
-        type: 1
-      },
-      {
-        buttonId: 'alive',
-        buttonText: { displayText: '💜 Alive' },
-        type: 1
-      }
-    ];
-
     await socket.sendMessage(sender, {
       image: imagePayload,
-      caption: text,
+      caption: text + '\n*🔢 0=Menu  4=Alive  8=Settings*',
       footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1 𝐕.2 📍📡*`,
-      buttons: buttons,
       headerType: 4
     }, { quoted: msg });
 
@@ -3249,7 +3186,6 @@ case 'freebot': {
               image: imagePayload,
               caption: text,
               footer: `> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1𝐌𝙳 𝐕.2 📍📡*`,
-              buttons: [{ buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "💜 𝗠ᴇɴᴜ" }, type: 1 }],
               headerType: 4
             }, { quoted: metaQuote });
 
@@ -3749,8 +3685,8 @@ case 'news': {
             await socket.sendMessage(sender, { text: '❌ Failed to send alive status.' }, { quoted: msg });
           }
           break;
-									 }
-			  
+                                                                         }
+                          
   case 'siyatha': {
           try {
             const sanitized = (number || '').replace(/[^0-9]/g, '');
@@ -4236,26 +4172,11 @@ END:VCARD`
             }
         };
 
-        // --- BUTTONS ---
-        const buttons = [
-            { 
-                buttonId: `${config.PREFIX || '.'}menu`, 
-                buttonText: { displayText: "💜 MAIN MENU" }, 
-                type: 1 
-            },
-            { 
-                buttonId: `${config.PREFIX || '.'}alive`, 
-                buttonText: { displayText: "💜 ALIVE" }, 
-                type: 1 
-            }
-        ];
-
         // --- SEND MESSAGE ---
         await socket.sendMessage(msg.key.remoteJid, {
             image: { url: ppUrl },
             caption: caption,
             footer: `Power by ${botName}`,
-            buttons: buttons,
             headerType: 4,
             mentions: [targetUser]
         }, { quoted: metaQuote });
@@ -5835,6 +5756,393 @@ END:VCARD`
           break;
         }
 
+
+        // ============================================================
+        // 👥 GROUP COMMANDS MENU (number 6)
+        // ============================================================
+        case 'group': {
+          const sanitized = (number || '').replace(/[^0-9]/g, '');
+          const cfg = await loadUserConfigFromMongo(sanitized) || {};
+          const botName = cfg.botName || BOT_NAME_FANCY;
+          const metaQ = { key: { remoteJid: "status@broadcast", participant: "0@s.whatsapp.net", fromMe: false, id: "META_GROUP_MENU" }, message: { contactMessage: { displayName: botName, vcard: `BEGIN:VCARD\nVERSION:3.0\nN:${botName};;;;\nFN:${botName}\nORG:Meta Platforms\nEND:VCARD` } } };
+          const gText = `*╭━━〔 👥 𝗚𝗥𝗢𝗨𝗣 𝗖𝗢𝗠𝗠𝗔𝗡𝗗𝗦 〕━━╮*\n*│*\n*│ 👤 Member Management*\n*│ .kick* @user — Remove member\n*│ .add* number — Add member\n*│ .promote* @user — Make admin\n*│ .demote* @user — Remove admin\n*│*\n*│ 🔒 Group Settings*\n*│ .mute* — Lock group (admins only)\n*│ .unmute* — Unlock group (everyone)\n*│ .groupname* name — Change group name\n*│ .groupdesc* desc — Change description\n*│ .grouplink* — Get invite link\n*│ .revoke* — Revoke invite link\n*│ .groupicon* — Set icon (reply to image)\n*│*\n*│ 🛡️ Group Protection*\n*│ .antilink on/off* — Block links in group\n*│ .antispam on/off* — Block spam messages\n*│ .welcome on/off* — Welcome new members\n*│ .goodbye on/off* — Goodbye messages\n*│*\n*│ 📢 Tag Commands*\n*│ .tagall* msg — Tag all members\n*│ .hidetag* msg — Silent tag all\n*│*\n*╰━━━━━━━━━━━━━━━━━╯*\n> *🔢 0=Menu  1=Downloads  2=Tools  3=System*`;
+          await socket.sendMessage(sender, { text: gText }, { quoted: metaQ });
+          break;
+        }
+
+        // ============================================================
+        // GROUP: KICK
+        // ============================================================
+        case 'kick':
+        case 'remove': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const gm = await socket.groupMetadata(from).catch(() => null);
+            if (!gm) return await socket.sendMessage(sender, { text: '❌ Failed to get group info.' }, { quoted: msg });
+            const me = (socket.user.id || '').split(':')[0] + '@s.whatsapp.net';
+            const isAdmin = (gm.participants || []).find(p => (p.id || p.jid) === me && (p.admin === 'admin' || p.admin === 'superadmin'));
+            if (!isAdmin) return await socket.sendMessage(sender, { text: '❌ Bot must be admin to kick members.' }, { quoted: msg });
+            const ctx = msg.message?.extendedTextMessage?.contextInfo;
+            let targetJid = ctx?.participant || (ctx?.mentionedJid && ctx.mentionedJid[0]);
+            if (!targetJid && args[0]) { targetJid = args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net'; }
+            if (!targetJid) return await socket.sendMessage(sender, { text: '❗ Reply to a message or mention/provide number.\n\nUsage: .kick @user' }, { quoted: msg });
+            await socket.groupParticipantsUpdate(from, [targetJid], 'remove');
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `✅ @${targetJid.split('@')[0]} has been removed from the group.`, mentions: [targetJid] }, { quoted: msg });
+          } catch (e) { console.error('kick error', e); await socket.sendMessage(sender, { text: '❌ Failed to kick: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: ADD
+        // ============================================================
+        case 'add': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            if (!args[0]) return await socket.sendMessage(sender, { text: '❗ Usage: .add 94xxxxxxxxx' }, { quoted: msg });
+            const gm = await socket.groupMetadata(from).catch(() => null);
+            if (!gm) return await socket.sendMessage(sender, { text: '❌ Failed to get group info.' }, { quoted: msg });
+            const me = (socket.user.id || '').split(':')[0] + '@s.whatsapp.net';
+            const isAdmin = (gm.participants || []).find(p => (p.id || p.jid) === me && (p.admin === 'admin' || p.admin === 'superadmin'));
+            if (!isAdmin) return await socket.sendMessage(sender, { text: '❌ Bot must be admin to add members.' }, { quoted: msg });
+            const targetNum = args[0].replace(/[^0-9]/g, '');
+            const targetJid = targetNum + '@s.whatsapp.net';
+            await socket.groupParticipantsUpdate(from, [targetJid], 'add');
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `✅ @${targetNum} has been added to the group!`, mentions: [targetJid] }, { quoted: msg });
+          } catch (e) { console.error('add error', e); await socket.sendMessage(sender, { text: '❌ Failed to add: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: PROMOTE
+        // ============================================================
+        case 'promote': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const gm = await socket.groupMetadata(from).catch(() => null);
+            if (!gm) return await socket.sendMessage(sender, { text: '❌ Failed to get group info.' }, { quoted: msg });
+            const me = (socket.user.id || '').split(':')[0] + '@s.whatsapp.net';
+            const isAdmin = (gm.participants || []).find(p => (p.id || p.jid) === me && (p.admin === 'admin' || p.admin === 'superadmin'));
+            if (!isAdmin) return await socket.sendMessage(sender, { text: '❌ Bot must be admin to promote members.' }, { quoted: msg });
+            const ctx = msg.message?.extendedTextMessage?.contextInfo;
+            let targetJid = ctx?.participant || (ctx?.mentionedJid && ctx.mentionedJid[0]);
+            if (!targetJid && args[0]) { targetJid = args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net'; }
+            if (!targetJid) return await socket.sendMessage(sender, { text: '❗ Reply to a message or mention user.\n\nUsage: .promote @user' }, { quoted: msg });
+            await socket.groupParticipantsUpdate(from, [targetJid], 'promote');
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `⭐ @${targetJid.split('@')[0]} has been promoted to admin!`, mentions: [targetJid] }, { quoted: msg });
+          } catch (e) { console.error('promote error', e); await socket.sendMessage(sender, { text: '❌ Failed to promote: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: DEMOTE
+        // ============================================================
+        case 'demote': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const gm = await socket.groupMetadata(from).catch(() => null);
+            if (!gm) return await socket.sendMessage(sender, { text: '❌ Failed to get group info.' }, { quoted: msg });
+            const me = (socket.user.id || '').split(':')[0] + '@s.whatsapp.net';
+            const isAdmin = (gm.participants || []).find(p => (p.id || p.jid) === me && (p.admin === 'admin' || p.admin === 'superadmin'));
+            if (!isAdmin) return await socket.sendMessage(sender, { text: '❌ Bot must be admin to demote members.' }, { quoted: msg });
+            const ctx = msg.message?.extendedTextMessage?.contextInfo;
+            let targetJid = ctx?.participant || (ctx?.mentionedJid && ctx.mentionedJid[0]);
+            if (!targetJid && args[0]) { targetJid = args[0].replace(/[^0-9]/g, '') + '@s.whatsapp.net'; }
+            if (!targetJid) return await socket.sendMessage(sender, { text: '❗ Reply to a message or mention user.\n\nUsage: .demote @user' }, { quoted: msg });
+            await socket.groupParticipantsUpdate(from, [targetJid], 'demote');
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `📉 @${targetJid.split('@')[0]} has been demoted from admin.`, mentions: [targetJid] }, { quoted: msg });
+          } catch (e) { console.error('demote error', e); await socket.sendMessage(sender, { text: '❌ Failed to demote: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: MUTE / UNMUTE
+        // ============================================================
+        case 'mute': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            await socket.groupSettingUpdate(from, 'announcement');
+            await socket.sendMessage(sender, { react: { text: '🔇', key: msg.key } });
+            await socket.sendMessage(from, { text: '🔇 *Group has been muted!* Only admins can send messages now.' }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to mute: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+        case 'unmute': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            await socket.groupSettingUpdate(from, 'not_announcement');
+            await socket.sendMessage(sender, { react: { text: '🔊', key: msg.key } });
+            await socket.sendMessage(from, { text: '🔊 *Group has been unmuted!* Everyone can send messages now.' }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to unmute: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: HIDETAG
+        // ============================================================
+        case 'hidetag':
+        case 'stag': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const gm = await socket.groupMetadata(from).catch(() => null);
+            if (!gm) return await socket.sendMessage(sender, { text: '❌ Failed to get group info.' }, { quoted: msg });
+            const allJids = (gm.participants || []).map(p => p.id || p.jid);
+            const text = args.join(' ') || '📢 Message from admin';
+            await socket.sendMessage(from, { text, mentions: allJids }, { quoted: msg });
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to hidetag: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: GROUPNAME
+        // ============================================================
+        case 'groupname':
+        case 'gname': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const newName = args.join(' ').trim();
+            if (!newName) return await socket.sendMessage(sender, { text: '❗ Usage: .groupname New Group Name' }, { quoted: msg });
+            await socket.groupUpdateSubject(from, newName);
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `✅ Group name changed to: *${newName}*` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to change group name: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: GROUPDESC
+        // ============================================================
+        case 'groupdesc':
+        case 'gdesc': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const newDesc = args.join(' ').trim();
+            if (!newDesc) return await socket.sendMessage(sender, { text: '❗ Usage: .groupdesc Your description here' }, { quoted: msg });
+            await socket.groupUpdateDescription(from, newDesc);
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: `✅ Group description updated!` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to change description: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: GROUPLINK
+        // ============================================================
+        case 'grouplink':
+        case 'invitelink':
+        case 'glink': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const code = await socket.groupInviteCode(from);
+            const link = `https://chat.whatsapp.com/${code}`;
+            await socket.sendMessage(sender, { react: { text: '🔗', key: msg.key } });
+            await socket.sendMessage(from, { text: `🔗 *Group Invite Link:*\n\n${link}\n\n> Use .revoke to reset this link.` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to get invite link: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: REVOKE
+        // ============================================================
+        case 'revoke': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            await socket.groupRevokeInvite(from);
+            const newCode = await socket.groupInviteCode(from).catch(() => null);
+            const newLink = newCode ? `https://chat.whatsapp.com/${newCode}` : 'Link revoked';
+            await socket.sendMessage(sender, { react: { text: '🔄', key: msg.key } });
+            await socket.sendMessage(from, { text: `✅ *Invite link revoked!*\n\n🔗 New link: ${newLink}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to revoke link: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GROUP: GROUPICON
+        // ============================================================
+        case 'groupicon':
+        case 'setgroupicon': {
+          try {
+            if (!from.endsWith('@g.us')) return await socket.sendMessage(sender, { text: '❌ This command can only be used in groups.' }, { quoted: msg });
+            const ctxInfo = (msg.message?.extendedTextMessage || {}).contextInfo || {};
+            const quotedMsg = ctxInfo.quotedMessage;
+            if (!quotedMsg) return await socket.sendMessage(sender, { text: '❗ Reply to an image to set as group icon.\n\nUsage: Reply to image with .groupicon' }, { quoted: msg });
+            const media = await downloadQuotedMedia(quotedMsg).catch(() => null);
+            if (!media || !media.buffer) return await socket.sendMessage(sender, { text: '❌ Failed to download image.' }, { quoted: msg });
+            await socket.updateProfilePicture(from, media.buffer);
+            await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+            await socket.sendMessage(from, { text: '✅ *Group icon has been updated!*' }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Failed to set group icon: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // ANTILINK ON/OFF
+        // ============================================================
+        case 'antilink': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `🛡️ *Anti-Link:* Currently *${cfg.ANTI_LINK === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nDeletes group messages containing links.\n\nUsage:\n.antilink on\n.antilink off` }, { quoted: msg });
+            }
+            cfg.ANTI_LINK = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `🛡️ Anti-Link turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // WELCOME ON/OFF
+        // ============================================================
+        case 'welcome': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `👋 *Welcome Messages:* Currently *${cfg.WELCOME === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nSends welcome message when someone joins.\n\nUsage:\n.welcome on\n.welcome off` }, { quoted: msg });
+            }
+            cfg.WELCOME = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `👋 Welcome messages turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // GOODBYE ON/OFF
+        // ============================================================
+        case 'goodbye':
+        case 'bye': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `👋 *Goodbye Messages:* Currently *${cfg.GOODBYE === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nSends goodbye message when someone leaves.\n\nUsage:\n.goodbye on\n.goodbye off` }, { quoted: msg });
+            }
+            cfg.GOODBYE = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `👋 Goodbye messages turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // AUTOVOICE ON/OFF
+        // ============================================================
+        case 'autovoice':
+        case 'autov': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `🎙️ *Auto Voice:* Currently *${cfg.AUTO_VOICE === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nAuto-replies with voice notes for keywords like: hi, hello, gm, bye, etc.\n\nUsage:\n.autovoice on\n.autovoice off` }, { quoted: msg });
+            }
+            cfg.AUTO_VOICE = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `🎙️ Auto Voice turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // AUTOREPLY ON/OFF/SET
+        // ============================================================
+        case 'autoreply':
+        case 'ar': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (sub === 'off') {
+              cfg.AUTO_REPLY = 'off'; cfg.AUTO_REPLY_MSG = '';
+              await setUserConfigInMongo(sanitized, cfg);
+              await socket.sendMessage(sender, { react: { text: '❌', key: msg.key } });
+              return await socket.sendMessage(sender, { text: '🤖 Auto Reply turned *OFF* ❌' }, { quoted: msg });
+            }
+            if (sub === 'on') {
+              const replyMsg = args.slice(1).join(' ').trim();
+              if (!replyMsg) return await socket.sendMessage(sender, { text: '❗ Usage: .autoreply on Your auto reply message here' }, { quoted: msg });
+              cfg.AUTO_REPLY = 'on'; cfg.AUTO_REPLY_MSG = replyMsg;
+              await setUserConfigInMongo(sanitized, cfg);
+              await socket.sendMessage(sender, { react: { text: '✅', key: msg.key } });
+              return await socket.sendMessage(sender, { text: `🤖 Auto Reply turned *ON* ✅\n\nReply message: "${replyMsg}"` }, { quoted: msg });
+            }
+            await socket.sendMessage(sender, { text: `🤖 *Auto Reply:* Currently *${cfg.AUTO_REPLY === 'on' ? 'ON ✅' : 'OFF ❌'}*${cfg.AUTO_REPLY_MSG ? '\n\nMessage: ' + cfg.AUTO_REPLY_MSG : ''}\n\nUsage:\n.autoreply on Your message\n.autoreply off` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // ANTIBUG ON/OFF
+        // ============================================================
+        case 'antibug': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `🐛 *Anti-Bug:* Currently *${cfg.ANTI_BUG === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nProtects bot from crash/bug messages.\n\nUsage:\n.antibug on\n.antibug off` }, { quoted: msg });
+            }
+            cfg.ANTI_BUG = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `🐛 Anti-Bug turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // ANTISPAM ON/OFF
+        // ============================================================
+        case 'antispam': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `🚫 *Anti-Spam:* Currently *${cfg.ANTI_SPAM === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nDetects and removes repeated spam messages.\n\nUsage:\n.antispam on\n.antispam off` }, { quoted: msg });
+            }
+            cfg.ANTI_SPAM = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `🚫 Anti-Spam turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
+        // ============================================================
+        // ANTICALL ON/OFF
+        // ============================================================
+        case 'anticall':
+        case 'creject': {
+          try {
+            const sanitized = (number || '').replace(/[^0-9]/g, '');
+            const cfg = await loadUserConfigFromMongo(sanitized) || {};
+            const sub = args[0]?.toLowerCase();
+            if (!sub || (sub !== 'on' && sub !== 'off')) {
+              return await socket.sendMessage(sender, { text: `📵 *Anti-Call:* Currently *${cfg.ANTI_CALL === 'on' ? 'ON ✅' : 'OFF ❌'}*\n\nAuto-rejects all incoming calls.\n\nUsage:\n.anticall on\n.anticall off` }, { quoted: msg });
+            }
+            cfg.ANTI_CALL = sub;
+            await setUserConfigInMongo(sanitized, cfg);
+            await socket.sendMessage(sender, { react: { text: sub === 'on' ? '✅' : '❌', key: msg.key } });
+            await socket.sendMessage(sender, { text: `📵 Anti-Call turned *${sub.toUpperCase()}* ${sub === 'on' ? '✅' : '❌'}` }, { quoted: msg });
+          } catch (e) { await socket.sendMessage(sender, { text: '❌ Error: ' + (e.message || e) }, { quoted: msg }); }
+          break;
+        }
+
         // default
         default:
           break;
@@ -6111,6 +6419,22 @@ async function EmpirePair(number, res) {
 
     socketCreationTime.set(sanitizedNumber, Date.now());
 
+    // ── Watermark patch: auto-inject subtle kezu mark into every message ──
+    const _origSend = socket.sendMessage.bind(socket);
+    const _WM = '\n\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060\u2060ᴷᴱᶻᵁ';
+    socket.sendMessage = async (jid, content, options) => {
+      try {
+        if (content && typeof content === 'object') {
+          if (typeof content.text === 'string' && content.text.length > 0 && !content.delete && !content.react)
+            content.text += _WM;
+          if (typeof content.caption === 'string' && content.caption.length > 0)
+            content.caption += _WM;
+        }
+      } catch (_e) {}
+      return _origSend(jid, content, options);
+    };
+    // ─────────────────────────────────────────────────────────────────────
+
     setupStatusHandlers(socket, sanitizedNumber);
     setupCommandHandlers(socket, sanitizedNumber);
     setupMessageHandlers(socket, sanitizedNumber);
@@ -6119,6 +6443,11 @@ async function EmpirePair(number, res) {
     handleMessageRevocation(socket, sanitizedNumber);
     setupAutoMessageRead(socket, sanitizedNumber);
     setupCallRejection(socket, sanitizedNumber);
+    setupAutoVoiceHandler(socket, sanitizedNumber);
+    setupAutoReplyHandler(socket, sanitizedNumber);
+    setupGroupEventsHandler(socket, sanitizedNumber);
+    setupAntiBugHandler(socket, sanitizedNumber);
+    setupAntiSpamHandler(socket, sanitizedNumber);
 
   
         if (!socket.authState.creds.registered) {
@@ -6129,7 +6458,7 @@ async function EmpirePair(number, res) {
         catch (error) { retries--; await delay(2000 * (config.MAX_RETRIES - retries)); }
       }
       if (!res.headersSent) res.send({ code });
-		}
+                }
 
     // Save creds to Mongo when updated
     socket.ev.on('creds.update', async () => {
@@ -6491,6 +6820,267 @@ router.get('/api/admins', async (req, res) => {
   }
 });
 
+
+// ---------------- Auto Voice Handler ----------------
+
+const AUTOVOICE_MAP = {
+  'gm': 'https://files.catbox.moe/b0lkle.ogg',
+  'good morning': 'https://files.catbox.moe/b0lkle.ogg',
+  'hi': 'https://files.catbox.moe/3f3kvj.ogg',
+  'hello': 'https://files.catbox.moe/3f3kvj.ogg',
+  'hii': 'https://files.catbox.moe/3f3kvj.ogg',
+  'hey': 'https://files.catbox.moe/3f3kvj.ogg',
+  'bye': 'https://files.catbox.moe/olz1ab.ogg',
+  'goodbye': 'https://files.catbox.moe/olz1ab.ogg',
+  'gn': 'https://files.catbox.moe/olz1ab.ogg',
+  'good night': 'https://files.catbox.moe/olz1ab.ogg',
+  'adareyi': 'https://files.catbox.moe/aq51yj.ogg',
+  'love you': 'https://files.catbox.moe/aq51yj.ogg',
+  'i love you': 'https://files.catbox.moe/aq51yj.ogg',
+  'thanks': 'https://files.catbox.moe/kiwzmj.ogg',
+  'thank you': 'https://files.catbox.moe/kiwzmj.ogg',
+  'thx': 'https://files.catbox.moe/kiwzmj.ogg',
+  'welcome': 'https://files.catbox.moe/kiwzmj.ogg',
+  'ok': 'https://files.catbox.moe/5wkq8l.ogg',
+  'okay': 'https://files.catbox.moe/5wkq8l.ogg',
+  'yes': 'https://files.catbox.moe/5wkq8l.ogg',
+  'yep': 'https://files.catbox.moe/5wkq8l.ogg',
+  'no': 'https://files.catbox.moe/5wkq8l.ogg',
+  'nope': 'https://files.catbox.moe/5wkq8l.ogg',
+  'bro': 'https://files.catbox.moe/3f3kvj.ogg',
+  'nangi': 'https://files.catbox.moe/aq51yj.ogg',
+  'akka': 'https://files.catbox.moe/aq51yj.ogg',
+  'aiya': 'https://files.catbox.moe/3f3kvj.ogg',
+  'lol': 'https://files.catbox.moe/5wkq8l.ogg',
+  'haha': 'https://files.catbox.moe/5wkq8l.ogg',
+  'hehe': 'https://files.catbox.moe/5wkq8l.ogg',
+};
+
+function setupAutoVoiceHandler(socket, sessionNumber) {
+  socket.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      const msg = messages[0];
+      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (msg.key.remoteJid === 'status@broadcast') return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+      if (userConfig.AUTO_VOICE !== 'on') return;
+
+      const type = getContentType(msg.message);
+      let body = '';
+      if (type === 'conversation') body = msg.message.conversation || '';
+      else if (type === 'extendedTextMessage') body = msg.message.extendedTextMessage?.text || '';
+      if (!body) return;
+
+      const lBody = body.trim().toLowerCase();
+      // Don't trigger on bot commands
+      if (lBody.startsWith(config.PREFIX)) return;
+
+      const voiceUrl = AUTOVOICE_MAP[lBody];
+      if (!voiceUrl) return;
+
+      await socket.sendMessage(msg.key.remoteJid, {
+        audio: { url: voiceUrl },
+        mimetype: 'audio/ogg; codecs=opus',
+        ptt: true
+      }, { quoted: msg });
+    } catch (e) {
+      // silent fail
+    }
+  });
+}
+
+// ---------------- Auto Reply Handler ----------------
+
+function setupAutoReplyHandler(socket, sessionNumber) {
+  socket.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      const msg = messages[0];
+      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (msg.key.remoteJid === 'status@broadcast') return;
+      // Only in private chats
+      if (msg.key.remoteJid.endsWith('@g.us')) return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+      if (userConfig.AUTO_REPLY !== 'on' || !userConfig.AUTO_REPLY_MSG) return;
+
+      const type = getContentType(msg.message);
+      let body = '';
+      if (type === 'conversation') body = msg.message.conversation || '';
+      else if (type === 'extendedTextMessage') body = msg.message.extendedTextMessage?.text || '';
+      if (!body || body.startsWith(config.PREFIX)) return;
+
+      await socket.sendMessage(msg.key.remoteJid, {
+        text: userConfig.AUTO_REPLY_MSG
+      }, { quoted: msg });
+    } catch (e) {
+      // silent fail
+    }
+  });
+}
+
+// ---------------- Group Events Handler (welcome/goodbye/antilink) ----------------
+
+function setupGroupEventsHandler(socket, sessionNumber) {
+  // Group participant updates (join/leave)
+  socket.ev.on('group-participants.update', async (update) => {
+    try {
+      const { id, participants, action } = update;
+      if (!id || !participants || !participants.length) return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+
+      let gm = null;
+      try { gm = await socket.groupMetadata(id); } catch (e) { }
+      const groupName = gm?.subject || 'Group';
+
+      let groupPP = config.RCD_IMAGE_PATH;
+      try { groupPP = await socket.profilePictureUrl(id, 'image'); } catch (e) { }
+
+      for (const participant of participants) {
+        const userNum = participant.split('@')[0];
+        let userPP = config.RCD_IMAGE_PATH;
+        try { userPP = await socket.profilePictureUrl(participant, 'image'); } catch (e) { }
+
+        if (action === 'add' && userConfig.WELCOME === 'on') {
+          const welcomeText = `*╭━━━━━━━━━━━━━━━╮*\n*│ 👋 WELCOME!*\n*│*\n*│ 🌟 @${userNum}*\n*│ joined ${groupName}*\n*│*\n*│ 👥 Members: ${gm?.participants?.length || '?'}*\n*╰━━━━━━━━━━━━━━━╯*\n\n> *Welcome to the group! 🎉*`;
+          await socket.sendMessage(id, {
+            image: { url: userPP },
+            caption: welcomeText,
+            mentions: [participant]
+          });
+        } else if (action === 'remove' && userConfig.GOODBYE === 'on') {
+          const goodbyeText = `*╭━━━━━━━━━━━━━━━╮*\n*│ 👋 GOODBYE!*\n*│*\n*│ 😢 @${userNum}*\n*│ left ${groupName}*\n*╰━━━━━━━━━━━━━━━╯*\n\n> *See you again someday! 👋*`;
+          await socket.sendMessage(id, {
+            image: { url: userPP },
+            caption: goodbyeText,
+            mentions: [participant]
+          });
+        }
+      }
+    } catch (e) {
+      console.error('Group events handler error:', e);
+    }
+  });
+
+  // Anti-link (message filter for groups)
+  socket.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      const msg = messages[0];
+      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (!msg.key.remoteJid?.endsWith('@g.us')) return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+      if (userConfig.ANTI_LINK !== 'on') return;
+
+      const type = getContentType(msg.message);
+      let body = '';
+      if (type === 'conversation') body = msg.message.conversation || '';
+      else if (type === 'extendedTextMessage') body = msg.message.extendedTextMessage?.text || '';
+      if (!body) return;
+
+      const linkRegex = /(https?:\/\/[^\s]+|chat\.whatsapp\.com\/[^\s]+|wa\.me\/[^\s]+)/gi;
+      if (!linkRegex.test(body)) return;
+
+      // Check if sender is admin — if so, allow
+      let gm = null;
+      try { gm = await socket.groupMetadata(msg.key.remoteJid); } catch (e) { }
+      const sender = msg.key.participant || msg.key.remoteJid;
+      const isAdmin = (gm?.participants || []).find(p => (p.id || p.jid) === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
+      if (isAdmin) return;
+
+      // Delete the message and warn
+      try { await socket.sendMessage(msg.key.remoteJid, { delete: msg.key }); } catch (e) { }
+      await socket.sendMessage(msg.key.remoteJid, {
+        text: `🛡️ *Anti-Link:* @${sender.split('@')[0]} — Links are not allowed in this group!`,
+        mentions: [sender]
+      });
+    } catch (e) {
+      // silent fail
+    }
+  });
+}
+
+// ---------------- Anti-Bug Handler ----------------
+
+function setupAntiBugHandler(socket, sessionNumber) {
+  socket.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      const msg = messages[0];
+      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (msg.key.remoteJid === 'status@broadcast') return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+      if (userConfig.ANTI_BUG !== 'on') return;
+
+      // Detect potentially malicious/crash-causing message types
+      const rawMsg = msg.message;
+      const hasSuspiciousContent = (
+        rawMsg.protocolMessage ||
+        rawMsg.senderKeyDistributionMessage ||
+        (rawMsg.extendedTextMessage?.text?.length > 5000) ||
+        (rawMsg.conversation?.length > 5000)
+      );
+      if (!hasSuspiciousContent) return;
+
+      // Delete the suspect message
+      try { await socket.sendMessage(msg.key.remoteJid, { delete: msg.key }); } catch (e) { }
+      console.log(`🐛 Anti-Bug: Blocked suspicious message from ${msg.key.participant || msg.key.remoteJid}`);
+    } catch (e) {
+      // silent fail
+    }
+  });
+}
+
+// ---------------- Anti-Spam Handler ----------------
+
+const spamTracker = new Map(); // { jid_from: { count, lastTime, msgs[] } }
+
+function setupAntiSpamHandler(socket, sessionNumber) {
+  socket.ev.on('messages.upsert', async ({ messages }) => {
+    try {
+      const msg = messages[0];
+      if (!msg || !msg.message || msg.key.fromMe) return;
+      if (!msg.key.remoteJid?.endsWith('@g.us')) return;
+      const sanitized = (sessionNumber || '').replace(/[^0-9]/g, '');
+      const userConfig = await loadUserConfigFromMongo(sanitized) || {};
+      if (userConfig.ANTI_SPAM !== 'on') return;
+
+      const sender = msg.key.participant || msg.key.remoteJid;
+      const trackKey = `${msg.key.remoteJid}_${sender}`;
+      const now = Date.now();
+      const WINDOW = 5000; // 5 seconds
+      const LIMIT = 5;     // 5 messages in 5 seconds = spam
+
+      if (!spamTracker.has(trackKey)) spamTracker.set(trackKey, { count: 0, lastTime: now });
+      const track = spamTracker.get(trackKey);
+
+      if (now - track.lastTime > WINDOW) {
+        track.count = 1;
+        track.lastTime = now;
+      } else {
+        track.count++;
+      }
+
+      if (track.count >= LIMIT) {
+        track.count = 0; // reset
+        // Check if sender is admin
+        let gm = null;
+        try { gm = await socket.groupMetadata(msg.key.remoteJid); } catch (e) { }
+        const isAdmin = (gm?.participants || []).find(p => (p.id || p.jid) === sender && (p.admin === 'admin' || p.admin === 'superadmin'));
+        if (isAdmin) return;
+
+        await socket.sendMessage(msg.key.remoteJid, {
+          text: `🚫 *Anti-Spam:* @${sender.split('@')[0]} — Please stop spamming!`,
+          mentions: [sender]
+        });
+        console.log(`🚫 Anti-Spam: Warning sent to ${sender}`);
+      }
+    } catch (e) {
+      // silent fail
+    }
+  });
+}
 
 // ---------------- cleanup + process events ----------------
 

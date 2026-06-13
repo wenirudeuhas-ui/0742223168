@@ -868,8 +868,7 @@ case 'menu': {
 
 
 
-
-> *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1  📍📡*
+> > *𝐏𝙾𝚆𝙴𝚁𝙴𝙳 𝐁𝐘 𝐐𝐔𝐄𝐄𝐍 𝐑𝐄𝐃 𝐂𝐇𝐔𝐓𝐈 𝐌𝐃 𝐕1  🌡️🌜📡*
 
 *╭━━〔 🔢 𝐍𝐀𝐕𝐈𝐆𝐀𝐓𝐈𝐎𝐍 〕━━╮*
 *│ 1️⃣ ─ 📥 Download Cmds*
@@ -883,7 +882,20 @@ case 'menu': {
 *╰━━━━━━━━━━━━━━━━━╯*
 > 📲 *Reply with number to navigate!*
 `.trim();
-      
+
+        const buttons = [
+            {
+                buttonId: "menu_list",
+                buttonText: { displayText: "📂 𝐎𝐏𝐄𝐍 𝐃𝐀𝐒𝐇𝐁𝐎𝐀𝐑𝐃" },
+                type: 4,
+                nativeFlowInfo: {
+                    name: "single_select",
+                    paramsJson: JSON.stringify({ title: "𝐕2.0.0 𝐒𝙴𝙻𝙴𝙲𝚃 𝐓𝙴𝙱 𝐌𝙴𝙽𝚄", sections })
+                }
+            },
+            // new buttons create 
+        ];
+
         // --- 📤 SEND AS FAKE DOCUMENT ---
         await socket.sendMessage(sender, {
             document: { url: MENU_IMG },
@@ -4258,7 +4270,7 @@ _${e.message}_`
 case 'owner':
 case 'erannda': {
             const ownerNumber = '+94705861067';
-            const ownerName = 'එරන්ද බබා💛🌡️📡';
+            const ownerName = '𝐄𝐫𝐚𝐧𝐧𝐝𝐚-𝐌𝐃📍📡';
             const organization = '*𝙴𝚁𝙰𝙽𝙽𝙳𝙰--𝙼𝙳 𝙾𝚆𝙽𝙴𝚁 𝙱𝚈 𝐀ʏᴇꜱʜ 𝐓ʜᴇᴍɪʏᴀ 𝙱𝙾𝚃 𝙳𝙴𝚅𝙰𝙻𝙾𝙿𝙰𝚁';
             const logoUrl = 'https://files.catbox.moe/z99gzh.mp4';
 
